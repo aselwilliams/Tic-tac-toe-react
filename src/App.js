@@ -7,16 +7,26 @@ function App() {
   const [cells, setCells] = useState([...Array(9).keys()])
   const [flag, setFlag] = useState(false)
 
+  const results=[
+    [1,2,3],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+  ]
+  
   const handleClick=(i)=>{
-    if(!flag){
-      let newData=[...cells]
-      newData[i]='X'
-      setCells(newData)
-    } else {
-      let newData=[...cells]
-      newData[i]='O'
-      setCells(newData)
-    }
+    let newData=[...cells]
+    flag ? newData[i]='O' : newData[i]='X';
+    // if(!flag){
+    //   newData[i]='X'
+    // } else {
+    //   newData[i]='O'  
+    // }
+    setCells(newData)
     setFlag(!flag)
   }
   return (
