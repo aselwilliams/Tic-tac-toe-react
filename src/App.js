@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import {useState} from 'react'
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 function App() {
+  const [cells, setCells] = useState([...Array(9).keys()])
+  const [flag, setFlag] = useState(false)
+
+  const handleClick=(i)=>{
+    if(!flag){
+      let newData=[...cells]
+      newData[i]='X'
+      setCells(newData)
+    } else {
+      let newData=[...cells]
+      newData[i]='O'
+      setCells(newData)
+    }
+    setFlag(!flag)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className='row'>
+      {cells.map((i, ind)=>{
+        return(
+          <div className='col-sm-4 box' onClick={()=>handleClick(ind)}>
+            {i}
+            </div>
+        )
+      })
+    }
+      </div>
     </div>
   );
 }
