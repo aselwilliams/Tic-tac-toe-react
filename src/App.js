@@ -36,13 +36,22 @@ function App() {
     setFlag(!flag)
   }
 
+  function longerStreaks(arr1, arr2){
+    let counter=0;
+    for(let i of arr1){
+      if( arr2.includes(i)){
+        counter++
+      }
+    }
+    return counter===3 ? true : false
+  }
   useEffect(()=>{
 for(let i of results){
   let joined=i.join('')
-  if(dataForX.join('')===joined){
-    console.log('X is a winner')
-  } else if (dataForO.join('')===joined){
-    console.log('O is a winner')
+  if(dataForX.join('')===joined || longerStreaks(dataForX, i)){
+    setWinner('X is a winner')
+  } else if (dataForO.join('')===joined || longerStreaks(dataForO, i)){
+    setWinner('O is a winner')
   }
 }
   },[dataForO, dataForX])
